@@ -1,6 +1,5 @@
 # ComposeNow
-In today's digital age, email communication plays a crucial role in both personal and professional  settings.  Composing  effective  and  impactful  emails  is  essential  for conveying  messages,  
-building  relationships,  and  achieving  desired  outcomes. However, crafting compelling emails that effectively convey the intended message can be time-consuming and challenging. 
+In today's digital age, email communication plays a crucial role in both personal and professional  settings.  Composing  effective  and  impactful  emails  is  essential  for conveying  messages, building  relationships,  and  achieving  desired  outcomes. However, crafting compelling emails that effectively convey the intended message can be time-consuming and challenging. 
 
 The project aims to address this challenge by leveraging cutting-edge  technologies  and  techniques  to  automate  the  process  of  email composition.  By  combining  the  power  of streamlit module in python,
 natural  language  processing  (NLP)  and OpenAI,  the  project  provides  users  with  a  seamless  and  efficient  solution  for generating contextually appropriate and coherent email content. 
