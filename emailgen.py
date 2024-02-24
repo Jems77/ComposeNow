@@ -2,32 +2,33 @@ import streamlit as st
 import sqlite3
 from ml_backend import ml_backend
 
+import base64
 
-_left, mid, _right = st.columns(3)
+import streamlit as st
+import base64
+
+_left, mid, _right = st.columns([2, 6, 2]) 
 with mid:
-    st.image("123.gif")
+    with open("C:/Users/ASUS/Documents/Lab Manuals/Minor Project/Project Code/logo.gif", "rb") as f:
+        encoded_gif = base64.b64encode(f.read()).decode("utf-8")
+    st.markdown(f'<p style="text-align: center;"><img width="300" src="data:image/gif;base64,{encoded_gif}"></p>', unsafe_allow_html=True)
 
-# Create a SQLite database connection
+
 conn = sqlite3.connect('credentials.db')
 c = conn.cursor()
 
-# Create a table for storing signup credentials
 c.execute('''CREATE TABLE IF NOT EXISTS users (
                 email TEXT PRIMARY KEY,
                 password TEXT
             )''')
 conn.commit()
 
-# Add a sidebar
 st.sidebar.title("ComposeNow")
 st.sidebar.write("Instant Creation, Seamless Communication")
 
 
-# Add a help section in the sidebar
 st.sidebar.markdown("# Help")
-st.sidebar.write("If you need any assistance or have questions, please reach out to our support team at support@example.com.")
-
-# Add a privacy section in the sidebar
+st.sidebar.write("If you need any assistance or have questions, please reach out to our support team at composenow@gmail.com.")
 st.sidebar.markdown("# Privacy")
 st.sidebar.write("Your privacy is important to us. Here are some key points:")
 st.sidebar.write("- We do not collect or store any personal data.")
@@ -36,18 +37,16 @@ st.sidebar.write("- We employ industry-standard security measures to protect you
 st.sidebar.write("- For more information, please review our [Privacy Policy](https://www.example.com/privacy).")
 
 
-# Catchy phrases
+
 st.title("ComposeNow")
 st.header("Instant Creation, Seamless Communication")
 st.markdown("Generate professional emails with ease.")
 st.markdown("Save time and effort in crafting emails.")
 st.markdown("Get instant email suggestions and drafts.")
 
-# Create a session state to store user credentials
 if 'sign_up_info' not in st.session_state:
     st.session_state['sign_up_info'] = {}
 
-# Sign-up page
 if 'is_signed_up' not in st.session_state:
     st.title("Sign Up")
     email = st.text_input("Email", key="signup_email")
@@ -55,15 +54,15 @@ if 'is_signed_up' not in st.session_state:
     confirm_password = st.text_input("Confirm Password", type="password", key="signup_confirm_password")
 
     if st.button("Sign Up", key="signup_button"):
-        # Perform sign-up validation and account creation
+        
         if password == confirm_password:
-            # Check if email already exists
+            
             c.execute("SELECT * FROM users WHERE email=?", (email,))
             existing_user = c.fetchone()
             if existing_user:
                 st.error("Email already exists. Please use a different email.")
             else:
-                # Store sign-up information in the database
+                
                 c.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, password))
                 conn.commit()
                 st.session_state['sign_up_info']['email'] = email
@@ -73,14 +72,14 @@ if 'is_signed_up' not in st.session_state:
         else:
             st.error("Passwords do not match!")
 
-# Login page
+
 if 'is_signed_up' in st.session_state and not st.session_state.get('is_logged_in', False):
     st.title("Log In")
     email = st.text_input("Email", key="login_email")
     password = st.text_input("Password", type="password", key="login_password")
 
     if st.button("Log In", key="login_button"):
-        # Perform login validation
+        
         c.execute("SELECT * FROM users WHERE email=?", (email,))
         user = c.fetchone()
         if user and user[1] == password:
