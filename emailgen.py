@@ -1,10 +1,6 @@
 import streamlit as st
 import sqlite3
 from ml_backend import ml_backend
-
-import base64
-
-import streamlit as st
 import base64
 
 _left, mid, _right = st.columns([2, 6, 2]) 
