@@ -1,3 +1,3 @@
-streamlit run "file path"
+streamlit run "File_Path\File_Name"
 
 
